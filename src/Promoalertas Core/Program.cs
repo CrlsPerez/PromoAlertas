@@ -14,7 +14,7 @@ namespace Promoalertas_Core
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("End Program.");
+            Console.WriteLine("Start Program.");
 
             Task<List<Post>> task = GetData();            
             List<Post> post = task.Result;
@@ -50,13 +50,13 @@ namespace Promoalertas_Core
             await context.OpenAsync("https://www.promodescuentos.com/nuevas");
             
             var lt_titulo = context.Active.GetElementsByClassName("thread-title-text");
-            var lt_categoria = context.Active.GetElementsByClassName("thread-category");
+            var lt_categoria = context.Active.GetElementsByClassName("thread-category linkPlain mute--text thread-category--type-card box--all-i");
             var lt_puntos = context.Active.GetElementsByClassName("vote-temp tGrid-cell vAlign--all-m text--b");
 
             List <Post> posts = new List<Post>();
 
-            for (int i = 0; i < posts.Count; i++)
-                posts.Add(new Post { titulo = lt_titulo[i].Text(), categoria = lt_categoria[i].Text(), puntos = lt_puntos[i].Text() });            
+            for (int i = 0; i < lt_titulo.Length; i++)
+                posts.Add(new Post { titulo = lt_titulo[i].Text(), categoria = lt_categoria[i].Text(), puntos = lt_puntos[i].Text().Replace("°", "") });            
 
             return posts;
         }
@@ -75,7 +75,7 @@ namespace Promoalertas_Core
                 int t_int = 0;
                 int.TryParse(item.puntos, out t_int);
 
-                if (t_int > 0)
+                if (t_int > 100)
                     post_selected.Add(item);
             }
 
