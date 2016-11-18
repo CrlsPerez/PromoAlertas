@@ -50,7 +50,7 @@ namespace Promoalertas_Core
             await context.OpenAsync("https://www.promodescuentos.com/nuevas");
             
             var lt_titulo = context.Active.GetElementsByClassName("thread-title-text");
-            var lt_categoria = context.Active.GetElementsByClassName("thread-category linkPlain mute--text thread-category--type-card box--all-i");
+            var lt_categoria = context.Active.GetElementsByClassName("thread-category linkPlain mute--text thread-category--type-card");
             var lt_puntos = context.Active.GetElementsByClassName("vote-temp tGrid-cell vAlign--all-m text--b");
 
             List <Post> posts = new List<Post>();
